@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.yedam.board.control.BoardAddControl;
 import com.yedam.board.control.BoardFormControl;
 import com.yedam.board.control.BoardListControl;
+import com.yedam.board.control.BoardSerarchContorl;
 import com.yedam.common.Controller;
 
 public class FrontContrller extends HttpServlet {
@@ -32,6 +33,7 @@ public class FrontContrller extends HttpServlet {
 		menu.put("/boardList.do", new BoardListControl());
 		menu.put("/boardForm.do", new BoardFormControl());
 		menu.put("/addBoard.do", new BoardAddControl());
+		menu.put("/getBoard.do",new BoardSerarchContorl());
 		
 		menu.put("/membre.do", new MemberControl());
 	}

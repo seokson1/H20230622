@@ -28,7 +28,7 @@
 			%>
 				<tr>
 					<td><%=vo.getBrdNo() %></td>
-					<td><%=vo.getBrdTitle() %></td>
+					<td><a href="getBoard.do?bno=<%=vo.getBrdNo() %>"><%=vo.getBrdTitle() %></a></td>
 					<td><%=vo.getBrdWriter() %></td>
 					<td><%=vo.getClickCnt() %></td>
 				</tr>
