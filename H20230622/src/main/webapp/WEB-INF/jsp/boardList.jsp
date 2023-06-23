@@ -3,11 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>WEB-INF/jsp/boardList.jsp</title>
+<jsp:include page="header.jsp"></jsp:include>
 <style>
 .center {
 	text-align: center;
@@ -37,15 +33,13 @@
 	background-color: #ddd;
 }
 </style>
-</head>
-<body>
 	<%
 	List<BoardVO> list = (List<BoardVO>) request.getAttribute("list"); // list = dao.list(); 넣음 위에서 클래스 실행되서
 	PageDTO pg = (PageDTO) request.getAttribute("page");
 	%>
 	<p><%=pg%></p>
 	<h3>게시판.</h3>
-	<table border="1">
+	<table class="table">
 		<thead>
 			<tr>
 				<th>글번호</th>
@@ -108,5 +102,4 @@
 			<div class="center">
 				<div class="pagination">
 					<br> <a href="boardForm.do">등록화면으로</a>
-</body>
-</html>
+<jsp:include page="footer.jsp"></jsp:include>

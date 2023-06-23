@@ -1,21 +1,14 @@
 <%@page import="com.yedam.board.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>boardModify.jsp</title>
-</head>
-<body>
-
+<jsp:incude page="header.jsp"></jsp:incude>
 	<%
 	BoardVO vo = (BoardVO) request.getAttribute("board");
 	%>
 
 	<h3>수정화면(boardModify)</h3>
 	<form action="boardModify.do" method="post">
-		<table border="1">
+		<table class="table">
 			<tr>
 				<th>글번호</th>
 				<td><input readonly name="no" value="<%=vo.getBrdNo()%>"></td>
@@ -41,5 +34,4 @@
 			</tr>
 		</table>
 	</form>
-</body>
-</html>
+<jsp:include page="footer.jsp"></jsp:include>

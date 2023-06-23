@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.board.service.BoardService;
-import com.yedam.board.service.BoardServiceImpl;
+import com.yedam.board.service.BoardServiceMybatis;
 import com.yedam.board.vo.BoardVO;
 import com.yedam.common.Controller;
 
@@ -30,7 +30,7 @@ public class BoardAddControl implements Controller {
 			vo.setBrdContent(ctn);
 			vo.setBrdWriter(wr);
 
-			BoardService service = new BoardServiceImpl();
+			BoardService service = new BoardServiceMybatis();
 			if (service.addBoard(vo)) {
 				resp.sendRedirect("boardList.do");
 			} else {

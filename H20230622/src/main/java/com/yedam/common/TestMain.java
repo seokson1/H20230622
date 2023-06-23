@@ -11,7 +11,15 @@ public class TestMain {
 
 	public static void main(String[] args) {
 		BoardService service = new BoardServiceMybatis();
-		System.out.println(service.getBoard(634));
+		BoardVO vo = new BoardVO();
+		
+	
+		vo.setBrdTitle("fljslfsklfjs");
+		vo.setBrdWriter("fsffsadfsf");
+		vo.setBrdContent("afdsfsfdsfsafddsfasf 추가한 내용.");
+		
+		System.out.println(service.addBoard(vo));
+		
 	}
 
 }

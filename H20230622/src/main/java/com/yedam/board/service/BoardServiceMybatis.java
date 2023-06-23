@@ -11,27 +11,29 @@ import com.yedam.common.DataSource;
 public class BoardServiceMybatis implements BoardService{
 
 	// SqlSessionFactory 객체
-	SqlSession session = DataSource.getInstance().openSession();
+	SqlSession session = DataSource.getInstance().openSession(true);
 	BoardMapper mapper = session.getMapper(BoardMapper.class);
 	
 	@Override
 	public boolean addBoard(BoardVO vo) {
-		return false;
+		return mapper.insertBoard(vo) == 1;
 	}
 
 	@Override
 	public BoardVO getBoard(long brdNo) {
-		return mapper.selectBoard(brdNo);
+		BoardVO vo = mapper.selectBoard(brdNo);
+		mapper.updateCnt(brdNo);
+		return vo;
 	}
 
 	@Override
 	public boolean editBoard(BoardVO vo) {
-		return false;
+		return mapper.updateBoard(vo) == 1;
 	}
 
 	@Override
 	public boolean delBoard(long brdNo) {
-		return false;
+		return mapper.deleteCnt(brdNo) == 1;
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class BoardServiceMybatis implements BoardService{
 
 	@Override
 	public int totalCnt() {
-		return 0;
+		return mapper.totalCnt();
 	}
 
 }

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.board.service.BoardService;
-import com.yedam.board.service.BoardServiceImpl;
+import com.yedam.board.service.BoardServiceMybatis;
 import com.yedam.board.vo.BoardVO;
 import com.yedam.common.Controller;
 import com.yedam.common.PageDTO;
@@ -21,7 +21,7 @@ public class BoardListControl implements Controller {
 		
 		String page = req.getParameter("page");
 		page = page == null ? "1" : page;
-		BoardService service = new BoardServiceImpl();
+		BoardService service = new BoardServiceMybatis();
 		PageDTO dto = new PageDTO(Integer.parseInt(page), service.totalCnt());
 		
 		

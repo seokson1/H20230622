@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.board.service.BoardService;
-import com.yedam.board.service.BoardServiceImpl;
+import com.yedam.board.service.BoardServiceMybatis;
 import com.yedam.board.vo.BoardVO;
 import com.yedam.common.Controller;
 
@@ -25,7 +25,7 @@ public class BoardModifyControl implements Controller {
 		vo.setBrdTitle(title);
 		vo.setBrdContent(content);
 		
-		BoardService service = new BoardServiceImpl();
+		BoardService service = new BoardServiceMybatis();
 		service.editBoard(vo);
 		
 		resp.sendRedirect("boardList.do");

@@ -6,6 +6,11 @@
 <settings>
 <setting name="mapUnderscoreToCamelCase" value="true"/>
 </settings>
+
+<typeAliases>
+  <typeAlias alias="board" type="com.yedam.board.vo.BoardVO"/>
+</typeAliases>
+
   <environments default="development">
     <environment id="development">
       <transactionManager type="JDBC"/>
