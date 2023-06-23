@@ -42,6 +42,7 @@
 			</tr>
 		</table>
 	</form>
+	<a href="boardList.do">목록화면으로</a>
 </body>
 
 </html>

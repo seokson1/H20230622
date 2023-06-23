@@ -1,9 +1,7 @@
 package com.yedam.board.control;
 
 import java.io.IOException;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,28 +10,26 @@ import com.yedam.board.service.BoardService;
 import com.yedam.board.service.BoardServiceImpl;
 import com.yedam.board.vo.BoardVO;
 import com.yedam.common.Controller;
-import com.yedam.common.PageDTO;
 
-public class BoardListControl implements Controller {
+public class BoardModifyControl implements Controller {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// DB 수정 > 목록
+		String no = req.getParameter("no");
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
 		
-		String page = req.getParameter("page");
-		page = page == null ? "1" : page;
+		BoardVO vo = new BoardVO();
+		vo.setBrdNo(Long.parseLong(no));
+		vo.setBrdTitle(title);
+		vo.setBrdContent(content);
+		
 		BoardService service = new BoardServiceImpl();
-		PageDTO dto = new PageDTO(Integer.parseInt(page), service.totalCnt());
+		service.editBoard(vo);
 		
+		resp.sendRedirect("boardList.do");
 		
-		List<BoardVO> list = service.list(Integer.parseInt(page));
-		
-		
-		req.setAttribute("list", list);
-		req.setAttribute("page", dto);
-		
-		RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/jsp/boardList.jsp");
-		rd.forward(req, resp);
-
 	}
 
 }

@@ -19,23 +19,24 @@ public class BoardAddControl implements Controller {
 		String wr = req.getParameter("writer");
 		String tl = req.getParameter("title");
 		String ctn = req.getParameter("content");
-		
-		if(wr == null || tl == null || ctn == null) {
+
+		if (wr.isEmpty() || tl.isEmpty() || ctn.isEmpty()) {
 			req.setAttribute("errorMsg", "필수 값을 입력하세요!!");
 			req.getRequestDispatcher("WEB-INF/jsp/boardForm.jsp").forward(req, resp);
-		} 
-		
-		BoardVO vo = new BoardVO();
-		vo.setBrdTitle(tl);
-		vo.setBrdContent(ctn);
-		vo.setBrdWriter(wr);
-		
-		BoardService service = new BoardServiceImpl();
-		if(service.addBoard(vo)) {
-			resp.sendRedirect("boardList.do");
 		} else {
-			resp.sendRedirect("addBoard.do");
-		}
-	}
 
+			BoardVO vo = new BoardVO();
+			vo.setBrdTitle(tl);
+			vo.setBrdContent(ctn);
+			vo.setBrdWriter(wr);
+
+			BoardService service = new BoardServiceImpl();
+			if (service.addBoard(vo)) {
+				resp.sendRedirect("boardList.do");
+			} else {
+				resp.sendRedirect("addBoard.do");
+			}
+		}
+
+	}
 }
