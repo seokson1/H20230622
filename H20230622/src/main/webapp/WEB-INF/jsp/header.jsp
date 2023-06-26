@@ -14,16 +14,42 @@
         <link href="bootstrap/css/styles.css" rel="stylesheet" />
     </head>
     <body>
+  		<%
+    		String logId = (String) session.getAttribute("loginId");
+  			String logName = (String) session.getAttribute("loginName");
+    	%> 
+    
+    	
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
-                <div class="list-group list-group-flush">
+                  <%       
+                    if(logId == null) { 
+                    %> 
+                <div class="sidebar-heading border-bottom bg-light">손님 입니다.</div>
+                <%
+                    } else {
+               	 %>
+                     <div class="sidebar-heading border-bottom bg-light"><%=logName %> 입니다.</div>
+                    <%
+                    }
+                    %>
+                	<div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardForm.do">등록화면</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do">게시판 목록</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
+                   <%       
+                    if(logId == null) {
+                    %> 
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberloginForm.do">로그인</a>
+                   <%
+                    
+                    } else {
+                    %>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberlogout.do">로그아웃</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberInfo.do">My Info</a>
+                    <%
+                    }
+                    %>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="header.jsp"></jsp:include>
 <style>
 .center {
@@ -33,11 +34,7 @@
 	background-color: #ddd;
 }
 </style>
-	<%
-	List<BoardVO> list = (List<BoardVO>) request.getAttribute("list"); // list = dao.list(); 넣음 위에서 클래스 실행되서
-	PageDTO pg = (PageDTO) request.getAttribute("page");
-	%>
-	<p><%=pg%></p>
+	
 	<h3>게시판.</h3>
 	<table class="table">
 		<thead>
@@ -49,56 +46,42 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%
-			for (BoardVO vo : list) {
-			%>
+			
+			<c:forEach items="${list }" var="vo">
+				
 			<tr>
-				<td><%=vo.getBrdNo()%></td>
-				<td><a href="getBoard.do?bno=<%=vo.getBrdNo()%>"><%=vo.getBrdTitle()%></a></td>
-				<td><%=vo.getBrdWriter()%></td>
-				<td><%=vo.getClickCnt()%></td>
+			<td><c:out value="${vo.brdNo }" /></td>
+				<td><a href="getBoard.do?bno=${vo.brdNo}">${vo.brdTitle }</a></td>
+				<td>${vo.brdWriter }</td>
+				<td>${vo.clickCnt }</td>
 			</tr>
-			<%
-			}
-			%>
+			</c:forEach>
+		
 		</tbody>
 	</table>
 	<br>
 	<div class="center">
 		<div class="pagination">
-		<%
-			//이전 페이지
-				if (pg.isPrev()) {
-		%>
-			<a href="boardList.do?page=<%=pg.getStartPage() - 1%>"> prev </a>
-		<%
-				}
-		%>
-
+		<c:if test="${page.prev }">
+			<a href="boardList.do?page=${page.startPage -1}"> prev </a>
+			</c:if>
 			
-		<%
-			//페이지 출력
-			for (int i = pg.getStartPage(); i <= pg.getEndPage(); i++) {
-				if (i == pg.getCurPage()) {
-		%>
-			<a href="boardList.do?page=<%=i%>" class="active"><%=i%></a>
-
-		<%
-				} else {
-		%>
-			<a href="boardList.do?page=<%=i%>"><%=i%></a>
-		<%
-				}
-			}
-		%>
-		<%
-			//다음 전페이지
-			if (pg.isNext()) {
-		%>
-			<a href="boardList.do?page=<%=pg.getEndPage() + 1%>"> next </a>
-		<%
-			}
-		%>
+		
+		<c:forEach begin="${page.startPage }" end="${page.endPage }" var="i">
+		
+			<c:choose>
+			<c:when test="${i == curPage}">
+			<a href="boardList.do?page=${i }" class="active"> <c:out value="${i }" /></a>
+			</c:when>
+			<c:otherwise>
+			<a href="boardList.do?page=${i }"> <c:out value="${i }" /></a>
+			</c:otherwise>
+		</c:choose>
+		</c:forEach>
+		<c:if test="${page.next }">
+			<a href="boardList.do?page=${page.endPage + 1}"> next </a>
+			</c:if>
+			
 			<div class="center">
 				<div class="pagination">
 					<br> <a href="boardForm.do">등록화면으로</a>
